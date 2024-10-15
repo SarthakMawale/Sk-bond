@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    cursor: url('red-cursor.png'), auto; /* Use the custom cursor */
+}
+
+/* Styling the navigation bar */
+.navbar {
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 10px 0;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
+    color: rgba(201, 201, 201, 0.678); /* Normal link color */
+    padding: 1px 20px;
+    text-decoration: none; /* Remove default underline */
+    font-size: 18px;
+    transition: color 0.3s ease-in-out, border-bottom 0.3s ease-in-out; /* Smooth transitions */
+    display: inline-block;
+    border-radius: 5px;
+    position: relative; /* Needed for the underline effect */
+}
+
+/* Hover effect for the links */
+.navbar a:hover {
+    color: white; /* Change text color on hover */
+    border-bottom: 4px solid purple; /* Add underline in purple color */
+}
+
+/* Active state (when the link is clicked) */
+.navbar a:active,
+.navbar a:focus {
+    color: white; /* Text color for the active state */
+    border-bottom: 3px solid purple; /* Keep the underline for the active state */
+}
+
+/* Banner styling */
+.banner {
+    width: 100%;
+    height: 230px;
+    background-image: url('_1728860013.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+main {
+    padding: 20px;
+    min-height: 1000px; /* This will allow scrolling */
+}
+
+/* Main title and information */
+h1 {
+    font-family: cursive;
+    color: white;
+    padding: 30px;
+    margin-top: 60px; /* Adjust for navbar */
+    font-size: 60px;  /* Smaller for responsiveness */
+    text-align: center;
+}
+
+h1 span {
+    position: relative;
+    left: 0;
+    color: rgb(255, 0, 212);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#info-1 {
+    color: wheat;
+    font-family: cursive, Arial;
+    font-size: 20px;
+    text-align: center;
+}
+
+#info-2 {
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-left: 50px;
+    text-align: center;
+}
+
+/* Thumbnail row */
+.thumbnail-row {
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 10px; /* Space between thumbnails */
+    padding: 20px;
+    margin-top: 20px; /* Add some margin on top for better spacing */
+}
+
+/* Thumbnail styling */
+.thumbnail {
+    position: relative; /* Position relative for absolute elements */
+    overflow: hidden; /* Hide overflow */
+    border-radius: 10px; /* Rounded corners */
+    transition: transform 0.3s ease; /* Smooth scaling */
+}
+
+.thumbnail:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.thumbnail img {
+    width: 100%; /* Full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Cover the area without distortion */
+}
+
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    h1 {
+        font-size: 50px;
+        margin-top: 10px;
+    }
+    .banner {
+        height: 120px;
+    }
+    .thumbnail-row {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Smaller thumbnails */
+    }
+    .thumbnail {
+        height: 80px; /* Fixed height for smaller thumbnails */
+    }
+}
+
+@media (max-width: 992px) {
+    .navbar a {
+        font-size: 16px;
+        padding: 12px 10px;
+    }
+    .banner {
+        margin-top: 50px;
+    }
+    h1 {
+        font-size: 45px;
+    }
+    #info-1,
+    #info-2 {
+        font-size: 18px;
+        padding-left: 20px;
+    }
+    .thumbnail {
+        flex: 0 0 250px;
+        height: 150px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 40px;
+    }
+    #info-1,
+    #info-2 {
+        font-size: 16px;
+        padding-left: 10px;
+    }
+    .thumbnail {
+        flex: 0 0 200px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar a {
+        font-size: 14px;
+        padding: 10px 8px;
+    }
+    .thumbnail-row {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Smaller thumbnails */
+    }
+    .thumbnail {
+        height: 80px; /* Fixed height for smaller thumbnails */
+    }
+    h1 {
+        font-size: 35px;
+    }
+    #info-1,
+    #info-2 {
+        font-size: 14px;
+        padding-left: 5px;
+        text-align: center;
+    }
+    #play-btn,
+    .info-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+        margin: 5px;
+    }
+    .thumbnail {
+        flex: 0 0 150px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-overlay {
+        padding: 0; /* No padding to maximize video size */
+        max-width: 100%; /* Full width on very small screens */
+        height: auto; /* Allow height to adjust */
+    }
+}
+
+@media (max-width: 320px) {
+    .video-overlay {
+        padding: 0; /* Minimal padding on very small screens */
+    }
+}
+       .video-overlay {
+    display: none; /* Initially hidden */
+    position: fixed; /* Fixed position */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Centering */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding around the video */
+    z-index: 1000; /* Ensure it's on top of other content */
+    max-width: 90%; /* Responsive max width */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Add shadow for better visibility */
+}
+
+.video-overlay video {
+    max-width: 100%; /* Responsive video width */
+    width: auto; /* Auto width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.overlay-active {
+    display: flex; /* Flex to enable centering */
+    flex-direction: column; /* Column layout */
+    align-items: center; /* Center align items */
+    justify-content: center; /* Center vertically */
+}
+
+/* Media queries for better responsiveness */
+@media (max-width: 768px) {
+    .video-overlay {
+        padding: 15px; /* Adjust padding for tablets */
+        max-width: 95%; /* Allow more width for larger mobile devices */
+    }
+
+    .video-overlay video {
+        max-width: 100%; /* Ensure the video takes full width on smaller screens */
+        height: auto; /* Maintain aspect ratio */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="banner">
+            <!-- You can add background image or other elements here -->
+        </div>
+    </header>
+
+    <div id="main-content" class="slide-out"> <!-- Main content wrapper -->
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#tvshows">TV Shows</a>
+            <a href="#gameplay">Gameplay</a>
+            <a href="#series">Series</a>
+            <a href="#" id="videos-button">videos</a>
+        </nav>
+
+        <h1 id="title">SK BOND <span>GAMING</span></h1>
+        <h4 id="info-1">#1 Desert Player here</h4>
+        <p id="info-2">
+            He is the new player, but his accuracy and movements are at the top level. 
+            Therefore, all call him "SK Bond Plays Like a Hacker". 
+            Let's see the gameplay for more information. Click on More info.
+        </p>
+
+        <div class="thumbnail-row">
+            <div class="thumbnail">
+                <img src="6dV84OMSs_8-HD.jpg" alt="video 1">
+            </div>
+            
+            <div class="thumbnail">
+                <img src="Ou7eSJJ6py8-HD.jpg" alt="video 2">
+            </div>
+            
+            <div class="thumbnail">
+                <img src="PBPUODxXWx8-HD.jpg" alt="video 3">
+            </div>
+            
+            <div class="thumbnail">
+                <img src="pHEmevn0XRU-HD.jpg" alt="video 4">
+            </div>
+
+            <div class="thumbnail">
+                <img src="S0sBqj7nDKw-HD.jpg" alt="video 5">
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Overlay -->
+    <div class="video-overlay" id="videoOverlay">
+        <video id="video-player" controls>
+            <source id="video-source" src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button id="close-video">Close</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Define the video URLs
+            const videoUrls = [
+                "videoplayback.mp4", // Video 1
+                "videoplayback (2).mp4", // Video 2
+                "videos/video3.mp4", // Video 3
+                "videos/video4.mp4", // Video 4
+                "videos/video5.mp4"  // Video 5
+            ];
+
+            const thumbnails = document.querySelectorAll('.thumbnail');
+
+            thumbnails.forEach((thumbnail, index) => {
+                thumbnail.addEventListener('click', function() {
+                    const videoUrl = videoUrls[index]; // Get the corresponding video URL
+
+                    // Get the video player and source elements
+                    const videoPlayer = document.getElementById('video-player');
+                    const videoSource = document.getElementById('video-source');
+
+                    // Update the video source
+                    videoSource.src = videoUrl; // Set the video source
+                    videoPlayer.load(); // Load the new video source
+                    videoPlayer.play(); // Play the video
+
+                    // Show the video overlay
+                    const videoOverlay = document.getElementById('videoOverlay');
+                    videoOverlay.classList.add('overlay-active'); // Add class to show overlay
+                });
+            });
+
+            // Close the video player and hide the overlay
+            document.getElementById('close-video').onclick = function() {
+                const videoOverlay = document.getElementById('videoOverlay');
+                videoOverlay.classList.remove('overlay-active'); // Remove class to hide overlay
+                const videoPlayer = document.getElementById('video-player');
+                videoPlayer.pause(); // Pause the video
+                videoPlayer.currentTime = 0; // Reset video to the beginning
+            };
+        });
+    </script>
+</body>
+</html>
